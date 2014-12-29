@@ -2,6 +2,11 @@
 #define PATH_ORAM_H__
 #include "tree_oram.h"
 
+/*
+Path ORAM simulator.
+http://dl.acm.org/citation.cfm?id=2516660
+*/
+
 class PathOram: public TreeOram
 {
    public:

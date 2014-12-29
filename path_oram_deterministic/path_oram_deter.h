@@ -2,6 +2,16 @@
 #define PATH_ORAM_DETER_H__
 #include "path_oram/path_oram.h"
 
+/*
+Path ORAM with deterministic eviction
+http://dl.acm.org/citation.cfm?id=2516660
+
+deterministic eviction proposed by Gentry et al in 
+https://eprint.iacr.org/2013/239
+
+these two are used together the first time in
+https://eprint.iacr.org/2014/345
+*/
 class PathOramDeter : public PathOram
 {
    public:
