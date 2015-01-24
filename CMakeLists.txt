@@ -12,10 +12,15 @@ add_executable(path_oram
     path_oram/test_path_oram.cpp
 )
 
+#add_executable(p_oram
+#    poram/test_poram.cpp
+#)
+
+
 add_executable(path_oram_determinstic
     path_oram_deterministic/test_path_oram.cpp
 )
 
-add_executable(binary_tree_oram
-    binary_tree_oram/test_binary_tree_oram.cpp
-)
+#add_executable(binary_tree_oram
+#    binary_tree_oram/test_binary_tree_oram.cpp
+#)

@@ -96,8 +96,8 @@ class TreeOram
          }
          bool here = stash.find(pos) != stash.end();
          stash.erase(pos);
-         if(stash.size() > 1000)
-            cout <<"Warning: stash size is likely to be unbounded."<<stash.size()<<endl;
+         //if(stash.size() > 10000)
+         //   cout <<"Warning: stash size is likely to be unbounded."<<stash.size()<<endl;
          return (found or here);
       }
 

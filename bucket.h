@@ -13,7 +13,12 @@ class Bucket
       {
          blocks.assign(c, -1);
       }
-
+      void recal_size(){
+         bsize = 0;
+         for(auto &v : blocks)
+            if(v != -1)
+               ++bsize;
+      }
       void clear()
       {
          bsize = 0;
