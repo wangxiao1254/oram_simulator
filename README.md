@@ -3,4 +3,4 @@
 How to run:
 cmake . && make
 
-./bin/.... for simulations
+`./bin/circuit_oram [logN] [bucket_size]` for simulations and find result in res/circuit_oram_logN_bucket_size
