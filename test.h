@@ -10,11 +10,10 @@ using std::cout;
 using std::endl;
 using std::map;
 using std::string;
-
-void pruint64_t(long long i, map<long long, long long >& m2, string filename, int bucket_size)
+void pruint64_t(long long i, map<long long, long long >& m2, string filename)
 {
    if(system("mkdir -p res"));
-   filename = "res/"+filename+"_"+std::to_string(bucket_size);
+   filename = "res/"+filename;
    cout <<i<<" "<<filename<<endl;
    std::ofstream fout(filename);
    fout << i<<endl<<endl;
@@ -27,5 +26,10 @@ void pruint64_t(long long i, map<long long, long long >& m2, string filename, in
       fout << v.first<<"\t"<<v.second<<"\t"<<sp<< endl;
    }
    fout.close();
+}
+
+void pruint64_t(long long i, map<long long, long long >& m2, string filename, int bucket_size)
+{
+   pruint64_t(i,m2, filename+std::to_string(bucket_size));
 }
 #endif// TEST_H__

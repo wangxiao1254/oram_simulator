@@ -11,7 +11,7 @@ using std::cout;
 using std::endl;
 
 #ifndef STASH_CAP
-#define STASH_CAP 10000
+#define STASH_CAP 100
 #endif
 class TreeOram
 {
@@ -43,7 +43,10 @@ class TreeOram
             delete v;
       }
       int stash_size() {
-         return stash->size();
+         int res = stash->size();
+         if(res == STASH_CAP)
+            exit(1);
+         return res;
       }
 
       void update_pos(int identifier)

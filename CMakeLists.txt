@@ -23,3 +23,7 @@ add_executable(circuit_oram
 add_executable(circuit_oram_determinstic
     circuit_oram_deterministic/test.cpp
 )
+
+add_executable(circuit_oram_opt
+    circuit_oram_opt/test.cpp
+)
