@@ -13,7 +13,7 @@ using std::string;
 
 void pruint64_t(long long i, map<long long, long long >& m2, string filename, int bucket_size)
 {
-   system("mkdir -p res");
+   if(system("mkdir -p res"));
    filename = "res/"+filename+"_"+std::to_string(bucket_size);
    cout <<i<<" "<<filename<<endl;
    std::ofstream fout(filename);

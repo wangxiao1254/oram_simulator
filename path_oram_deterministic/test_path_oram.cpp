@@ -29,7 +29,7 @@ int main(int argc, char ** argv )
       {
          cout<<"tree oram invariance is broken"<<i<<endl;
       }
-      ++counter[oram.stash.size()];
+      ++counter[oram.stash_size()];
       ++i;
       if((i%1000000) == 0)
          pruint64_t(i, counter, string("path_deter")+"_"+string(argv[1]), cap);

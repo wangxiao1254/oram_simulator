@@ -1,7 +1,7 @@
 project(log3oram)
 cmake_minimum_required(VERSION 2.6.0 FATAL_ERROR)
 
-set(CMAKE_CXX_FLAGS "-O3 --std=c++0x -DNDEBUG -Wall")
+set(CMAKE_CXX_FLAGS "-O3 --std=c++0x -DNDEBUG -Wall -Wno-sign-compare")
 #set(CMAKE_CXX_FLAGS "-g -ggdb --std=c++0x -Wall")
 
 include_directories(${CMAKE_SOURCE_DIR})
@@ -12,15 +12,10 @@ add_executable(path_oram
     path_oram/test_path_oram.cpp
 )
 
-#add_executable(p_oram
-#    poram/test_poram.cpp
-#)
-
-
 add_executable(path_oram_determinstic
     path_oram_deterministic/test_path_oram.cpp
 )
 
-#add_executable(binary_tree_oram
-#    binary_tree_oram/test_binary_tree_oram.cpp
-#)
+add_executable(circuit_oram
+    circuit_oram/test_circuit_oram.cpp
+)

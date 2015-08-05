@@ -1,4 +1,4 @@
-#ifndef TREE_ORAM_H__
+ #ifndef TREE_ORAM_H__
 #define TREE_ORAM_H__
 #include "bucket.h"
 #include <vector>
@@ -10,15 +10,18 @@ using std::set;
 using std::cout;
 using std::endl;
 
+#ifndef STASH_CAP
+#define STASH_CAP 10000
+#endif
 class TreeOram
 {
    public: 
       vector<Bucket<int>*> tree;
-      set<int> stash;
       vector<int> index;
       std::mt19937 rg;
       std::uniform_int_distribution<int> uni;
       int N, logN, h;
+      Bucket<int> * stash;
       TreeOram(int _logN, int buck_size, int _h)
       {
          rg.seed(time(0));
@@ -26,16 +29,21 @@ class TreeOram
          h = _h;
          N = 1<<logN;
          uni = std::uniform_int_distribution<int>(0, (1<<(h-1))-1);
-         for(int i = 0; i < 1<<h; ++i)
+         tree.push_back(new Bucket<int>(STASH_CAP));
+         for(int i = 1; i < 1<<h; ++i)
             tree.push_back(new Bucket<int>(buck_size));
          index.assign(N+1, -1);
-         for(int i = 0; i <= index.size(); ++i)
+         for(unsigned int i = 0; i < index.size(); ++i)
             index[i] = uni(rg);
+         stash = tree[0];
       }
 
       ~TreeOram() {
          for(auto & v : tree) 
             delete v;
+      }
+      int stash_size() {
+         return stash->size();
       }
 
       void update_pos(int identifier)
@@ -85,21 +93,14 @@ class TreeOram
 
       bool readAndRemove(int pos)
       {
-         bool found = false;
          int index_pos = index[pos];
-         for(int level = 1; level <= h; ++level)
+         for(int level = 0; level <= h; ++level)
          {
             int iter = bucketAt(index_pos, level);
-            bool here = tree[iter]->readAndRemove(pos);
-            found = found or here;
-            if(here)break;
+            if (tree[iter]->readAndRemove(pos) )
+               return true;
          }
-         bool here = stash.find(pos) != stash.end();
-         stash.erase(pos);
-         //if(stash.size() > 10000)
-         //   cout <<"Warning: stash size is likely to be unbounded."<<stash.size()<<endl;
-         return (found or here);
+         return false;
       }
-
 };
 #endif //TREE_ORAM_H__

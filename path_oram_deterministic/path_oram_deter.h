@@ -3,7 +3,7 @@
 #include "path_oram/path_oram.h"
 
 /*
-Path ORAM with deterministic eviction
+Path ORAM
 http://dl.acm.org/citation.cfm?id=2516660
 
 deterministic eviction proposed by Gentry et al in 
@@ -24,7 +24,7 @@ class PathOramDeter : public PathOram
       bool access(int identifier)
       {
          bool res = readAndRemove(identifier);
-         stash.insert(identifier);
+         stash->add(identifier);
          update_pos(identifier);
          int a = reverse_order();
          flush(a);

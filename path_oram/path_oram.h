@@ -3,9 +3,9 @@
 #include "tree_oram.h"
 
 /*
-Path ORAM simulator.
+   Path ORAM simulator.
 http://dl.acm.org/citation.cfm?id=2516660
-*/
+ */
 
 class PathOram: public TreeOram
 {
@@ -19,7 +19,7 @@ class PathOram: public TreeOram
       {
          int old_pos = index[identifier];
          bool res = readAndRemove(identifier);
-         stash.insert(identifier);
+         stash->add(identifier);
          update_pos(identifier);
          flush(old_pos);
          return res;
@@ -27,30 +27,27 @@ class PathOram: public TreeOram
 
       void flush(int path)
       {
-         vector<int> temp_stash;
+         vector<int> temp;
 
-         for(int level = 1; level <= h; ++level)
+         for(int level = 0; level <= h; ++level)
          {
             auto buc = tree[bucketAt(path, level)];
             for(auto &v : buc->blocks)
             {
                if(v != -1)
-                  temp_stash.push_back(v);
+                  temp.push_back(v);
             }
-         buc->clear();
+            buc->clear();
          }
-
-         for(auto &v: stash)
-            temp_stash.push_back(v);
 
          for(int level = h; level >=1; --level)
          {
             auto buc = tree[bucketAt(path, level)];
-            for(auto &v:temp_stash)
+            for(auto &v:temp)
             {
                if( v != -1
-                  and (bucketAt(path,level) == bucketAt(index[v],level) )
-                  and (buc->size() < buc->capacity())
+                     and (bucketAt(path,level) == bucketAt(index[v],level) )
+                     and (buc->size() < buc->capacity())
                  )
                {
                   buc->add(v);
@@ -58,10 +55,10 @@ class PathOram: public TreeOram
                }
             }
          }
-         stash.clear();
-         for(auto &v:temp_stash)
+         stash->clear();
+         for(auto &v:temp)
             if(v != -1)
-               stash.insert(v);
+               stash->add(v);
       }
 };
 #endif// PATH_ORAM_H__

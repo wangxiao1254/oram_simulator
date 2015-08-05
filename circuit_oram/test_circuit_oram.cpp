@@ -1,4 +1,4 @@
-#include "path_oram.h"
+#include "circuit_oram.h"
 #include <iostream>
 #include <map>
 #include <fstream>
@@ -12,9 +12,9 @@ int main(int argc, char ** argv )
    int logN = stoi(string(argv[1]));
    int cap = stoi(string(argv[2]));
    long long N = (1<<logN);
-   PathOram oram(logN, cap);
+   CircuitOram oram(logN, cap);
    long long i = 0;
-   int warmup = 1<<20;
+   int warmup = N;
    map<long long, long long> counter;
    
    cout <<"Starting warmming up with "<<warmup<<" operations."<<endl;
@@ -27,11 +27,11 @@ int main(int argc, char ** argv )
       bool res = oram.access(i%N);
       if(not res)
       {
-         cout<<"tree oram invariance is broken"<<i<<endl;
+         cout<<"tree oram invariance is broken "<<i<<" "<<oram.stash_size()<<endl;
       }
       ++counter[oram.stash_size()];
       ++i;
       if((i%1000000) == 0)
-         pruint64_t(i, counter, string("path")+"_"+string(argv[1]), cap);
+         pruint64_t(i, counter, string("circuit")+"_"+string(argv[1]), cap);
    }
 }
