@@ -9,13 +9,17 @@ include_directories(${CMAKE_SOURCE_DIR})
 set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
 
 add_executable(path_oram
-    path_oram/test_path_oram.cpp
+    path_oram/test.cpp
 )
 
 add_executable(path_oram_determinstic
-    path_oram_deterministic/test_path_oram.cpp
+    path_oram_deterministic/test.cpp
 )
 
 add_executable(circuit_oram
-    circuit_oram/test_circuit_oram.cpp
+    circuit_oram/test.cpp
+)
+
+add_executable(circuit_oram_determinstic
+    circuit_oram_deterministic/test.cpp
 )

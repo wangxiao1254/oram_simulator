@@ -14,7 +14,7 @@ int main(int argc, char ** argv )
    long long N = (1<<logN);
    CircuitOram oram(logN, cap);
    long long i = 0;
-   int warmup = N;
+   int warmup = 1<<20;
    map<long long, long long> counter;
    
    cout <<"Starting warmming up with "<<warmup<<" operations."<<endl;
