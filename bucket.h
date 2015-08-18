@@ -70,12 +70,12 @@ class Bucket
          return -1;
       }
 
-      int size()
+      int size() const
       {
          return bsize;
       }
 
-      int capacity()
+      int capacity() const
       {
          return blocks.size();
       }

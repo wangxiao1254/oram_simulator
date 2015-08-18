@@ -11,7 +11,7 @@ using std::cout;
 using std::endl;
 
 #ifndef STASH_CAP
-#define STASH_CAP 100
+#define STASH_CAP 50
 #endif
 class TreeOram
 {
